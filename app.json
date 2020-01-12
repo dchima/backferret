@@ -20,8 +20,8 @@
     }
   },
   "formation": {},
-  "name": "backend-template",
-  "repository": "https://github.com/dchima/backend-template.git",
+  "name": "backferret",
+  "repository": "https://github.com/dchima/backferret.git",
   "scripts": {},
   "stack": "heroku-18"
 }
