@@ -1,0 +1,27 @@
+{
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": {
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": true
+    },
+    "SECRET": {
+      "required": true
+    }
+  },
+  "formation": {},
+  "name": "backend-template",
+  "repository": "https://github.com/dchima/backend-template.git",
+  "scripts": {},
+  "stack": "heroku-18"
+}

@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "test": "cross-env NODE_ENV=test nyc --reporter=text --reporter=html mocha src/test/*.js --timeout 10000 -c --require @babel/register --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "start": "node dist/index.js",
+    "build": "babel src -d dist",
+    "migrate": "sequelize db:migrate ",
+    "migrate:reset": "sequelize db:migrate:undo:all",
+    "seed": "sequelize db:seed:all",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset && cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test npm run seed",
+    "start:dev": "npm run migrate && npm run seed && nodemon --exec babel-node ./src/index.js"
+  }
+  
+}

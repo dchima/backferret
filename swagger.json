@@ -1,0 +1,39 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "version": "1.0",
+      "title": "Capcards captions",
+      "description": "Capcards give free captions services for the web"
+  },
+  "servers": [
+      {
+        "url": "http://localhost:3000/"
+      },
+      {
+        "url": "https://capcards-api.herokuapp.com/"
+      }
+    ],
+  "host": "",
+  "basePath": "/v1.0/api",
+  "securityDefinitions": {
+      "Bearer": {
+          "description": "Standard Authorization header using the bearer scheme. Example: \"bearer {token}\"",
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header"
+      }
+  },
+  "tags": [
+      {
+          "name": "Caption",
+          "description": "Endpoint for captions"
+      }
+  ],
+  "paths": {
+
+  },
+  "requestBody": {
+
+  }
+}
+  
