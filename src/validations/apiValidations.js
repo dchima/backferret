@@ -76,6 +76,25 @@ export default class ApiValidations {
     return true;
   }
 
+
+    /**
+   * validate tags/captions ids
+   * @param {object} object - The input tag parameter
+   * @return {object | boolean} - returns an object or boolean
+   * @memberof ApiValidations
+   */
+  static validateTagArray(object) {
+    const schema = {
+      tagArray: joi.array().items(joi.string().required().label('all values in array must be a string')),
+    };
+    const {error} = joi.validate({...object}, schema);
+    if (error) {
+      console.log(error.details[0].context);
+      throw error;
+    }
+    return true;
+  }
+
   /**
    * validate caption string and tag ids
    * @param {object} payload - object to be validated

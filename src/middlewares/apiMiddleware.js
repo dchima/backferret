@@ -6,7 +6,8 @@ const {
   errorResponse,
 } = Helpers;
 const {
-  validateCaption, validateTag, validateId, validateIds, validateCaptionAndTagIds
+  validateCaption, validateTag, validateId, validateIds, validateCaptionAndTagIds,
+  validateTagArray
 } = ApiValidations;
 const {
   findCaption,
@@ -90,6 +91,7 @@ export default class ApiMiddleware {
   static async captionAndTagIdCheck(req, res, next) {
     const { tags } = req.body;
     let tagIds;
+    let tagArray;
     try {
       if(req.body.tags){
         const caption = await findCaption({ caption: req.body.caption });
@@ -98,12 +100,14 @@ export default class ApiMiddleware {
         tagIds = tags.map((items) => items.tagId);
         console.log('tag ids: ', tagIds);
       } else {
-        tagIds = req.body.tagIds;
+        //tagIds = req.body.tagIds;
+        tagArray = req.body.tagArray;
+        validateTagArray({ tagArray });
       }
-      const tagsInDatabase = await findMultipleTags({ id: tagIds });
+      const tagsInDatabase = await findMultipleTags({ tag: tagArray });
       let foundAllTags = true;
-      tagIds.forEach((id) => {
-        const found = tagsInDatabase.find((item) => item.id === id);
+      tagArray.forEach((tag) => {
+        const found = tagsInDatabase.find((item) => item.tag === tag);
         if (found === undefined) foundAllTags = false;
       });
       if (!foundAllTags) return errorResponse(res, { code: 400, message: 'one of the tags does not exist' });

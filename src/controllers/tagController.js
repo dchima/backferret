@@ -57,10 +57,10 @@ export default class TagController {
    * @memberof CaptionController
    */
   static async getCaptionsByTagIds(req, res) {
-    const { tagIds } = req.body;
+    const { tagIds, tagArray } = req.body;
     try {
       let allCaptions = [];
-      const captionsInDatabase = await captionsWithMultipleTags({ id: tagIds });
+      const captionsInDatabase = await captionsWithMultipleTags({ tag: tagArray });
       captionsInDatabase.forEach((item) => {
         item.captions.forEach((value) => {
           allCaptions.push(value.caption);

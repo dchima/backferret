@@ -13,6 +13,6 @@ const router = expressRouter();
 
 router.post('/', tagCheck, createTag);
 router.get('/', getTags);
-router.post('/tagIds', captionAndTagIdCheck, getCaptionsByTagIds);
+router.post('/array', captionAndTagIdCheck, getCaptionsByTagIds);
 
 export default router;
