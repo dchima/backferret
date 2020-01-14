@@ -41,6 +41,7 @@ export default class CaptionService {
    * @memberof CaptionService
    */
   static async findCaption(keys) {
+    console.log('key: ', keys);
     return Caption.findOne({ where: keys });
   }
 

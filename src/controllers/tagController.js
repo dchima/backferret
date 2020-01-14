@@ -42,8 +42,9 @@ export default class TagController {
   static async getTags(req, res) {
     try {
       const allTags = await getAllTags();
+      const tags = allTags.map((items) => items.tag);
       if (!allTags.length) return errorResponse(res, { code: 404, message: 'There are no tags' });
-      return successResponse(res, { allTags });
+      return successResponse(res, { tags });
     } catch (error) {
       errorResponse(res, {});      
     }
@@ -56,11 +57,11 @@ export default class TagController {
    * @return {JSON} -JSON response
    * @memberof CaptionController
    */
-  static async getCaptionsByTagIds(req, res) {
-    const { tagIds, tagArray } = req.body;
+  static async getCaptionsByTags(req, res) {
+    const { tags } = req.body;
     try {
       let allCaptions = [];
-      const captionsInDatabase = await captionsWithMultipleTags({ tag: tagArray });
+      const captionsInDatabase = await captionsWithMultipleTags({ tag: tags });
       captionsInDatabase.forEach((item) => {
         item.captions.forEach((value) => {
           allCaptions.push(value.caption);

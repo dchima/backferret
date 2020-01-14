@@ -3,16 +3,16 @@ import { ApiMiddleware } from '../middlewares';
 import { TagController } from '../controllers';
 
 const {
-  tagCheck, captionAndTagIdCheck,
+  tagCheck, checkTagArray,
 } = ApiMiddleware
 const {
-  createTag, getTags, getCaptionsByTagIds,
+  createTag, getTags, getCaptionsByTags,
 } = TagController;
 
 const router = expressRouter();
 
 router.post('/', tagCheck, createTag);
 router.get('/', getTags);
-router.post('/array', captionAndTagIdCheck, getCaptionsByTagIds);
+router.post('/array', checkTagArray, getCaptionsByTags);
 
 export default router;

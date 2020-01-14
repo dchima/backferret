@@ -85,7 +85,7 @@ export default class ApiValidations {
    */
   static validateTagArray(object) {
     const schema = {
-      tagArray: joi.array().items(joi.string().required().label('all values in array must be a string')),
+      tags: joi.array().items(joi.string().required().label('all values in tags array must be a string')),
     };
     const {error} = joi.validate({...object}, schema);
     if (error) {
@@ -101,15 +101,11 @@ export default class ApiValidations {
    * @returns {object | boolean} - returns an error object or valid boolean
    * @memberof ApiValidations
    */
-  static validateCaptionAndTagIds(payload) {
-    const tagObject = joi.object().keys({
-      tagId: joi.number().integer().min(1).label('Please enter a positive tag id number'),
-    });
-    const tags = joi.array().items(tagObject);
+  static validateCaptionAndTags(payload) {
     const schema = {
       caption: joi.string().min(3).max(100).required()
       .label('Please enter a caption more than 3 characters, less than 100'),
-      tags,
+      tags: joi.array().items(joi.string().required().label('all values in tags array must be a string')),
     };
     const { error } = joi.validate({ ...payload }, schema);
     if (error) throw error;

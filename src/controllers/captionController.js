@@ -80,14 +80,15 @@ export default class CaptionController {
    * @memberof CaptionController
    */
   static async createCaptionWithTags(req, res) {
-    let { caption, tags } = req.body;
+    let { caption } = req.body;
+    const { tags } = req;
     caption = caption.toLowerCase();
     const payload = {
       caption,
       tags,
     };
     try {
-      const createdCaption = await newCaptionWithTags(payload);
+     const createdCaption = await newCaptionWithTags(payload);
       successResponse(res, { message: 'caption created', createdCaption }, 201);
     } catch (error) {
       errorResponse(res, {});
