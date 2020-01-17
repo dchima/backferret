@@ -61,6 +61,7 @@ export default class TagController {
     const { tags } = req.body;
     try {
       let allCaptions = [];
+      let captions = [];
       const captionsInDatabase = await captionsWithMultipleTags({ tag: tags });
       captionsInDatabase.forEach((item) => {
         item.captions.forEach((value) => {
@@ -68,11 +69,14 @@ export default class TagController {
         })
       });
       let unique = [...new Set(allCaptions)];
-      let duplicates = unique.map((value) => [{ 
-        caption: value, 
-        numberOfTags: allCaptions.filter((str) => str === value).length 
-      }]);
-      successResponse(res, { duplicates }, 200);
+      unique.forEach((value) => {
+        captions.push({
+          caption: value,
+          numberOfTags: allCaptions.filter((str) => str === value).length
+        });
+      });
+      captions.sort((a, b) => b.numberOfTags - a.numberOfTags );
+      successResponse(res, { captions }, 200);
     } catch (error) {
       errorResponse(res, {});
     }
